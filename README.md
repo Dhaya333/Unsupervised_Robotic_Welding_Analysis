@@ -4,6 +4,7 @@ unsupervised-welding-analysis
 Final year B.Tech project (Artificial Intelligence and Data Science) — St. Joseph College of Engineering, Sriperumbudur, Anna University, May 2026.
 
 **Team:** Udhaya A (212922243058) · Gobinath T (212922243011) · Sanjay T (212922243058)
+
 **Guide:** Mrs. G.S. Jackulin Asha, M.E., HOD Dept. of AI & DS
 
 # Report 
