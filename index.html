@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WeldScan — Acoustic Quality Monitor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <header class="header">
+        <div class="header-left">
+            <div class="brand">WELDSCAN</div>
+            <div class="brand-divider"></div>
+            <div class="brand-sub">Acoustic Weld Quality Monitor</div>
+        </div>
+        <div class="header-right">
+            <div class="header-meta">
+                <span class="meta-label">TIME</span>
+                <span class="meta-value mono" id="timestamp">--:--:--</span>
+            </div>
+            <div class="header-meta">
+                <span class="meta-label">BACKEND</span>
+                <span class="meta-value" id="connStatus">OFFLINE</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-grid">
+
+        <!-- Left Panel -->
+        <aside class="panel left-panel">
+
+            <section class="panel-section">
+                <div class="section-title">Input Configuration</div>
+
+                <div class="field-group">
+                    <label class="field-label">Audio Source</label>
+                    <select id="audioSource"></select>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label class="field-label">FFT Size</label>
+                        <div class="field-value">4096 pts</div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Smoothing</label>
+                        <div class="field-value">0.85</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel-section">
+                <div class="section-title">Controls</div>
+                <div class="btn-stack">
+                    <button id="startBtn" class="btn btn-start">Start Analysis</button>
+                    <button id="stopBtn" class="btn btn-stop" disabled>Stop</button>
+                </div>
+            </section>
+
+            <section class="panel-section grow">
+                <div class="section-title">Session Log</div>
+                <div class="log-box" id="logBox">
+                    <div class="log-entry log-system">System ready. Awaiting input.</div>
+                </div>
+            </section>
+
+        </aside>
+
+        <!-- Center Panel -->
+        <main class="center-panel">
+
+            <div class="result-banner idle" id="resultBanner">
+                <div class="result-label" id="resultLabel">IDLE</div>
+                <div class="result-sub" id="resultSub">Select an audio source and press Start Analysis</div>
+            </div>
+
+            <div class="viz-section">
+                <div class="viz-header">
+                    <span class="viz-title">Waveform — Time Domain</span>
+                    <span class="viz-badge" id="vizBadge">STOPPED</span>
+                </div>
+                <div class="canvas-wrap">
+                    <canvas id="visualizer"></canvas>
+                </div>
+            </div>
+
+            <div class="viz-section">
+                <div class="viz-header">
+                    <span class="viz-title">Frequency Spectrum</span>
+                    <span class="freq-scale">0 Hz — 22 kHz</span>
+                </div>
+                <div class="canvas-wrap spectrum-wrap">
+                    <canvas id="spectrum"></canvas>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Right Panel -->
+        <aside class="panel right-panel">
+
+            <section class="panel-section">
+                <div class="section-title">Diagnostics</div>
+
+                <div class="metric-card verdict-card" id="verdictCard">
+                    <div class="metric-label">Weld Verdict</div>
+                    <div class="metric-value verdict-idle" id="verdictValue">--</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Peak Amplitude</div>
+                    <div class="metric-value mono" id="peakAmp">0.000</div>
+                    <div class="meter-track">
+                        <div class="meter-fill peak-fill" id="peakMeter"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">RMS Level</div>
+                    <div class="metric-value mono" id="rmsLevel">0.000</div>
+                    <div class="meter-track">
+                        <div class="meter-fill rms-fill" id="rmsMeter"></div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Dominant Frequency</div>
+                    <div class="metric-value mono" id="domFreq">0 <span class="unit">Hz</span></div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Zero Crossings / Frame</div>
+                    <div class="metric-value mono" id="zeroCross">0</div>
+                </div>
+            </section>
+
+            <section class="panel-section grow">
+                <div class="section-title">Result History</div>
+                <div class="history-list" id="historyList">
+                    <div class="history-empty">No results recorded yet.</div>
+                </div>
+            </section>
+
+        </aside>
+
+    </div>
+</div>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

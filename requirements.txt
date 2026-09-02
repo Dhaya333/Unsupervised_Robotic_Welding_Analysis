@@ -1,0 +1,44 @@
+# ==========================================================
+# WeldScan — AI-Driven Unsupervised Robotic Welding Process
+# Analysis Using Sound
+# Python dependencies
+# Tested on Python 3.9 – 3.11
+# ==========================================================
+
+# ---- Backend server / real-time communication ----
+Flask==3.0.3
+Flask-Cors==4.0.1
+Flask-SocketIO==5.3.6
+python-socketio==5.11.2
+eventlet==0.36.1          # async worker used by Flask-SocketIO for WebSocket streaming
+
+# ---- Core numerical / data handling ----
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.1
+
+# ---- Machine learning ----
+scikit-learn==1.5.0
+joblib==1.4.2
+
+# ---- Audio processing / feature extraction ----
+librosa==0.10.2
+soundfile==0.12.1
+noisereduce==3.0.2
+audioread==3.0.1          # librosa audio backend dependency
+numba==0.59.1              # librosa/numba acceleration dependency
+
+# ---- Offline / local microphone capture (predict.py / standalone app.py variant) ----
+sounddevice==0.4.7
+
+# ==========================================================
+# Notes:
+# - Install with:  pip install -r requirements.txt
+# - On Linux, PortAudio must be installed system-wide for
+#   `sounddevice` to work:  sudo apt-get install portaudio19-dev
+# - librosa/soundfile require libsndfile; on Linux install with:
+#   sudo apt-get install libsndfile1
+# - Frontend (index.html / app.js / style.css) has no build step
+#   and only needs a modern browser; Socket.IO client is loaded
+#   via CDN inside index.html.
+# ==========================================================

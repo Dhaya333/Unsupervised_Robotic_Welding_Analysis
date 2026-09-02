@@ -1,0 +1,11 @@
+# Audio datasets
+*.wav
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# IDE
+.vscode/
